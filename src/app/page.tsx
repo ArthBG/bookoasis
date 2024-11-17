@@ -1,5 +1,5 @@
-import Image from "next/image";
-import BooksList from "@/components/booksList/booksList";
+// import Image from "next/image";
+import BooksList from "../components/booksList/booksList";
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { addHours } from 'date-fns'
-import { hash } from 'bcryptjs'
+// import { addHours } from 'date-fns'
+// import { hash } from 'bcryptjs'
 import prisma from '@/libs/prisma'
-import { log } from 'console'
+// import { log } from 'console'
 
 export async function GET(req: Request, { params }: { params: { bookid: number } }) {
     console.log(params.bookid);
