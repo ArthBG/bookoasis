@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addHours, format, formatISO } from 'date-fns';
+import { format } from 'date-fns';
 import prisma from '@/libs/prisma';
 
 export async function GET() {
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-        const formattedReleaseDate = formatISO(new Date(releaseDate));
+        const formattedReleaseDate = format(new Date(releaseDate), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
         const book = await prisma.book.create({
             data: {
                 title,
