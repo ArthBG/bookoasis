@@ -15,30 +15,79 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(cuid())
-  name     String
-  email    String @unique
+  id String  @id @default(cuid())
+  name String 
+  birthDate DateTime
+  email String @unique
   password String
-  age      Int?
-
-  profile Profile?
-
+  age Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  purchases Purchase[] @relation("UserPurchase")
+  books Book[] @relation("UserBook")
+  refreshToken RefreshToken[] @relation("UserRefreshToken")
+
 
   @@map("users")
 }
 
-model Profile {
-  id          String  @id @default(cuid())
-  userId      String  @unique
-  avatar      String?
-  phoneNumber String?
+model Book {
+  id          Int      @id @default(autoincrement())
+  title       String
+  category    String
+  synopsis    String
+  numberOfPages Int
+  author      String
+  releaseDate DateTime
+  publisher   String
+  isbn        String
+  language    String
+  edition     Int
+  coverURL    String
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user User[] @relation("UserBook")
+  bookId Purchase[] @relation("BookPurchase")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("profiles")
+  @@map("books")
 }
+model RefreshToken {
+  id String @id @default(cuid())
+  userId String 
+  token String @unique
+  expiresAt DateTime
+
+  user User @relation("UserRefreshToken", fields : [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+
+  @@map("refresh_token")
+}
+
+model Purchase {
+  id String @id @default(cuid())
+  userId String
+  bookId Int 
+  purchaseDate DateTime
+  price Float
+  paymentMethod String
+  status String
+
+  user User @relation("UserPurchase", fields : [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  book Book @relation("BookPurchase", fields : [bookId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("purchases")
+}
+
+// crie um post de insominia com base da tabela book :
+// {
+//   "title": "O Senhor dos Anéis",
+//   "category": "Fantasia",
+//   "synopsis": "O Senhor dos Anéis é um romance de fantasia criado pelo escritor, professor e filólogo britânico J. R. R. Tolkien. A história começa como sequência de um livro anterior de Tolkien, O Hobbit, e logo se desenvolve numa história muito maior.",
+//   "numberOfPages": 1200,
+//   "author": "J. R. R. Tolkien",
+//   "realeaseDate": "1954-07-29T00:00:00.000Z",
+//   "isbn": 9780544003415,
+//   "language": "Português",
+//   "edition": 1,
+//   "coverURL": "https://images-na.ssl-images-amazon.com/images/I/51v0b4zr5HL._SX331_BO1,204,203,200_.jpg"
+// }
