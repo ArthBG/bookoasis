@@ -1,5 +1,5 @@
 'use server'
-import { Book } from '@/types/Book';
+import { Book } from '../types/Book';
 
 //Get all books
 export async function getAllBooks(){
