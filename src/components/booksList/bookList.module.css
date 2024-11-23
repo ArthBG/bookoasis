@@ -1,0 +1,53 @@
+.divCard {
+    background-color: #fff; /* Fundo branco */
+    border-radius: 10px; /* Cantos arredondados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow: hidden; /* Para garantir que a imagem não ultrapasse os limites do card */
+    max-width: 300px; /* Limitar a largura do card */
+    margin: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para hover */
+  }
+  
+  .divCard:hover {
+    transform: translateY(-5px); /* Leve movimento de elevação no hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra mais intensa no hover */
+  }
+  
+  .cover {
+    width: 100%;
+    height: 200px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border-radius: 8px;
+  }
+  
+  .bookTitle {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #333; /* Cor de texto suave */
+  }
+  
+  .author {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777; /* Cor de texto mais clara para o autor */
+    margin: 5px 0;
+  }
+  
+  .synopsis {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.95rem;
+    color: #555; /* Cor suave para o texto */
+    line-height: 1.5;
+    margin-top: 10px;
+    color: #444;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  
+  
