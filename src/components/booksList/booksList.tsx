@@ -17,7 +17,7 @@ const BooksList = () => {
     }, [])
 
     return (
-        <div>
+        <div className={styles.maindiv}>
             {books.map((book) => (
                 <div key={book.id}>
                     <div className={styles.divCard}>
