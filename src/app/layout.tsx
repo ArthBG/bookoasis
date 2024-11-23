@@ -8,9 +8,10 @@ import { ThemeProvider } from 'next-themes'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Auth.JS Boilerplate',
-  description: 'A boilerplate for building authentication systems with Next.js and Auth.JS.'
-}
+  title: 'Book Oasis',
+  description: 'Book Oasis is a place where you can find your favorite books and authors.',
+  viewport: 'width=device-width, initial-scale=1',
+  }
 
 export default function RootLayout({
   children
