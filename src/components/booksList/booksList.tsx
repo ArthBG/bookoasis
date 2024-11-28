@@ -20,13 +20,16 @@ const BooksList = () => {
     return (
         <div className={styles.maindiv}>
             {books.map((book) => (
-                <Card.Root maxW="sm" overflow="hidden" key={book.id}>
+                <Card.Root className={styles.divCard} minWidth="20%" maxWidth="20%" overflow="hidden" key={book.id}>
                     <Image src={book.coverURL} className={styles.cover} alt={book.title}  />
                     <Card.Body gap="2">
-                    <Card.Title>{book.title}</Card.Title>
-        <Card.Description>
-          {book.synopsis}
+                    <Card.Title maxWidth="80%">{book.title}</Card.Title>
+        <Card.Description fontWeight="bold">
+          {book.author}
         </Card.Description>
+        <Text textStyle="sm" color="gray.500">
+          {book.publisher}
+        </Text>
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
           $450
         </Text>
