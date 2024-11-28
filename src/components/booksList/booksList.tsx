@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { Book } from '../../types/Book'
 import styles from './bookList.module.css'
+import { Button, Card, Image, Text } from "@chakra-ui/react"
 
 const BooksList = () => {
     const [books, setBooks] = useState<Book[]>([])
@@ -19,14 +20,22 @@ const BooksList = () => {
     return (
         <div className={styles.maindiv}>
             {books.map((book) => (
-                <div key={book.id}>
-                    <div className={styles.divCard}>
-                    <img className={styles.cover} src={book.coverURL} alt={book.title} />
-                    <h2 className={styles.bookTitle}>{book.title}</h2>
-                    <p className={styles.author}>{book.author}</p>
-                    <p className={styles.synopsis}>{book.synopsis}</p>
-                    </div>
-                </div>
+                <Card.Root maxW="sm" overflow="hidden" key={book.id}>
+                    <Image src={book.coverURL} className={styles.cover} alt={book.title}  />
+                    <Card.Body gap="2">
+                    <Card.Title>{book.title}</Card.Title>
+        <Card.Description>
+          {book.synopsis}
+        </Card.Description>
+        <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
+          $450
+        </Text>
+      </Card.Body>
+      <Card.Footer gap="2">
+        <Button variant={'solid'}>Comprar</Button>
+        <Button variant={'ghost'}>Adicionar ao carrinho</Button>
+      </Card.Footer>
+                </Card.Root>
             ))}
         </div>
     )

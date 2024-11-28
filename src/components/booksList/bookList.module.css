@@ -21,10 +21,10 @@
 }
 
 .cover {
-  width: 100%;
-  height: 200px; /* Altura fixa para a imagem */
-  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-  border-radius: 8px;
+  width: 250px;
+  padding: 10px;
+  height: 230px; /* Altura fixa para a imagem */
+  object-fit: cover;
 }
 
 .bookTitle {
