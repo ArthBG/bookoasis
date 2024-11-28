@@ -2,9 +2,10 @@
 .main {
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
-.welcome-text {
+.welcometext {
   text-align: center;
   font-size: 1.5rem; /* 2xl */
 }
