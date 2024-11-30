@@ -1,0 +1,32 @@
+/* header.module.css */
+.header {
+  background-color: #f80000; /* Fundo branco */
+  width: 100%; /* Largura total */  
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  top: 0;
+}
+
+.nav {
+  display: flex; /* Alinha os itens horizontalmente */
+  justify-content: center; /* Centraliza os itens */
+  list-style: none; /* Remove os marcadores da lista */
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  margin: 0 15px; /* Espaçamento entre os itens */
+}
+
+.navLink {
+  text-decoration: none; /* Remove o sublinhado dos links */
+  color: #333; /* Cor do texto */
+  font-size: 1rem; /* Tamanho da fonte */
+  font-weight: 500; /* Peso da fonte */
+  transition: color 0.3s ease; /* Transição suave para a cor */
+}
+
+.navLink:hover {
+  color: #0070f3; /* Cor do texto ao passar o mouse */
+}
