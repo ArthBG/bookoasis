@@ -1,29 +1,24 @@
-/* styles/styles.css */
+/* styles/page.module.css */
 .main {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(150deg, #001f3f, #0074D9);
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, #02034b 1%, #4a69bd 30%, #6a89cc 50%, #DFEBFB 70%); 
   height: 100%;
 }
-.container{
+
+.container {
   display: flex;
-  align-items: center;
-  padding-top: 4rem;
-  align-items: center;
+  align-self: start;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
 }
-.texts{
+
+.texts {
   align-self: center;
-  width: 55%;
+  width: 69%;
   margin-left: 5rem;
   display: flex;
   flex-direction: column;
-}
-.welcometext {
-  text-align: center;
-  font-size: 1.5rem; /* 2xl */
-}
-.images{
-  border-bottom-right-radius: 100px;
-  border-top-right-radius: 290px; 
-  border-bottom-left-radius: 120px;
 }
