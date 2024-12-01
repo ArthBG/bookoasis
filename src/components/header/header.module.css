@@ -1,10 +1,12 @@
 /* header.module.css */
 .header {
-  background-color: #f80000; /* Fundo branco */
-  width: 100%; /* Largura total */  
+  background: linear-gradient(90deg, #001f3f, #0074D9); /* Gradiente de navy blue */
+  width: 100%; /* Largura total */
   padding: 20px; /* Espaçamento interno */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  position: sticky; /* Fixa o header no topo */
   top: 0;
+  z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
 
 .nav {
@@ -21,12 +23,12 @@
 
 .navLink {
   text-decoration: none; /* Remove o sublinhado dos links */
-  color: #333; /* Cor do texto */
+  color: #fff; /* Cor do texto */
   font-size: 1rem; /* Tamanho da fonte */
   font-weight: 500; /* Peso da fonte */
   transition: color 0.3s ease; /* Transição suave para a cor */
 }
 
 .navLink:hover {
-  color: #0070f3; /* Cor do texto ao passar o mouse */
+  color: #FFDC00; /* Cor do texto ao passar o mouse */
 }
