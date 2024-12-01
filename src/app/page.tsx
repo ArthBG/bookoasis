@@ -4,7 +4,7 @@ import styles from "./page.module.css"
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main className={styles.main} style={{ paddingTop: '85px' }}>
       <Header />
       <p className={styles.welcometext}>Welcome to the Bookstore</p>
       <BooksList />
