@@ -7,7 +7,6 @@ export default function Home() {
     <main className={styles.main} style={{ paddingTop: '85px' }}>
       <Header />
       <p className={styles.welcometext}>Welcome to the Bookstore</p>
-      <BooksList />
     </main>
   );
 }
