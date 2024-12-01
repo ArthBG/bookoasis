@@ -2,7 +2,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background: linear-gradient(90deg, #001f3f, #0074D9);
 }
 
 .welcometext {

@@ -5,7 +5,7 @@ const Header = () => {
       <img src={"../BookOasisWletters.png"}alt="Book Oasis" className={styles.imageLogo} />
       <ul className={styles.nav}>
         <li className={styles.navItem}>
-          <a href="#home" className={styles.navLink}>Home</a>
+          <a href="/" className={styles.navLink}>Home</a>
         </li>
         <li className={styles.navItem}>
           <a href="/ProductList" className={styles.navLink}>Livros</a>
