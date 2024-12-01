@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   background: linear-gradient(150deg, #001f3f, #0074D9);
-  height: 100vh;
+  height: 100%;
 }
 .container{
   display: flex;
