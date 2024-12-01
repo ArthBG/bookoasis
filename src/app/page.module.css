@@ -8,7 +8,11 @@
   display: flex;
 }
 .texts{
+  align-self: center;
   width: 55%;
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
 }
 .welcometext {
   text-align: center;
