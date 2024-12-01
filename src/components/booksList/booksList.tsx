@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Book } from '../../types/Book'
 import styles from './bookList.module.css'
 import { Button, Card, Image, Text } from "@chakra-ui/react"
+import { motion } from "motion/react"   
 
 const BooksList = () => {
     const [books, setBooks] = useState<Book[]>([])
@@ -18,7 +19,12 @@ const BooksList = () => {
     }, [])
 
     return (
-        <div className={styles.maindiv}>
+        <motion.div 
+        className={styles.maindiv}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 20 }}
+        transition={{ duration: 0.6 }}
+        >  
             {books.map((book) => (
                 <Card.Root className={styles.divCard} minWidth="20%" maxWidth="20%" overflow="hidden" key={book.id}>
                     <Image src={book.coverURL} className={styles.cover} alt={book.title}  />
@@ -40,7 +46,7 @@ const BooksList = () => {
       </Card.Footer>
                 </Card.Root>
             ))}
-        </div>
+        </motion.div>
     )
 }
 

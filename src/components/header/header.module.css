@@ -1,0 +1,44 @@
+/* header.module.css */
+.header {
+  background: transparent; 
+  width: 100%; /* Largura total */
+  top: 0;
+  position: fixed;
+  height: 85px;
+  display: flex; /* Alinha os itens horizontalmente */
+  z-index: 1000; /* Garante que o header fique acima de outros elementos */
+}
+.imageLogo {
+  margin-left: 2rem; /* Espaçamento interno */
+
+}
+.nav {
+  display: flex; /* Alinha os itens horizontalmente */
+  justify-content: center; /* Centraliza os itens */
+  align-items: center; /* Alinha os itens verticalmente */
+  list-style: none; /* Remove os marcadores da lista */
+  margin: 0;
+  position: absolute; /* Posiciona o menu de navegação */
+  right: 0; /* Alinha o menu à direita */
+  align-self: center;
+  padding: 0;
+}
+
+.navItem {
+  margin: 0 20px; /* Espaçamento entre os itens */
+}
+
+.navLink {
+  text-decoration: none; /* Remove o sublinhado dos links */
+  color: #fff; /* Cor do texto */
+  font-size: 1rem; /* Tamanho da fonte */
+  font-weight: 500; /* Peso da fonte */
+  padding: 10px 15px; /* Espaçamento interno dos links */
+  border-radius: 5px; /* Cantos arredondados */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para a cor e o fundo */
+}
+
+.navLink:hover {
+  background-color: #005bb5; /* Cor de fundo ao passar o mouse */
+  color: #FFDC00; /* Cor do texto ao passar o mouse */
+}

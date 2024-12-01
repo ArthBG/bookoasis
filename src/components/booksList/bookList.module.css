@@ -52,7 +52,6 @@
   text-overflow: ellipsis;
   height: 100px; /* Limitando a altura da sinopse */
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limita o número de linhas da sinopse */
   -webkit-box-orient: vertical;
 }
 

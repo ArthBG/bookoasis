@@ -2,10 +2,28 @@
 .main {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background: linear-gradient(150deg, #001f3f, #0074D9);
+  height: 100vh;
 }
-
+.container{
+  display: flex;
+  align-items: center;
+  padding-top: 4rem;
+  align-items: center;
+}
+.texts{
+  align-self: center;
+  width: 55%;
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+}
 .welcometext {
   text-align: center;
   font-size: 1.5rem; /* 2xl */
+}
+.images{
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 290px; 
+  border-bottom-left-radius: 120px;
 }
