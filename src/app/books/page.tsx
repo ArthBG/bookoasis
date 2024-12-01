@@ -15,7 +15,7 @@ export default function BooksPage() {
         publisher: '',
         language: '',
         isbn: '',
-        edition: '',
+        edition: 0,
         coverURL: '',
     });
 
@@ -23,7 +23,7 @@ export default function BooksPage() {
         const { name, value } = e.target;
         setNewBook({
             ...newBook,
-            [name]: name === 'numberOfPages' ? parseInt(value) : value,
+            [name]: name === 'numberOfPages' || name === 'edition' ? parseInt(value) : value,
         });
     };
 
@@ -51,7 +51,7 @@ export default function BooksPage() {
                     publisher: '',
                     language: '',
                     isbn: '',
-                    edition: '',
+                    edition: 0,
                     coverURL: '',
                 });
             }
