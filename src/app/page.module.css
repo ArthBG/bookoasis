@@ -4,8 +4,18 @@
   flex-direction: column;
   background: linear-gradient(90deg, #001f3f, #0074D9);
 }
-
+.container{
+  display: flex;
+}
+.texts{
+  width: 55%;
+}
 .welcometext {
   text-align: center;
   font-size: 1.5rem; /* 2xl */
+}
+.images{
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 290px; 
+  border-bottom-left-radius: 120px;
 }
