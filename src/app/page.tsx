@@ -20,7 +20,7 @@ export default function Home() {
         </Button>
         </div>
         <div className={styles.image}>
-        <img src="../ilustrationHome.png" className={styles.images} alt="Ilustração de uma mulher lendo um livro"/>
+        <img src="../ilustrationHome.png" className={styles.images} alt="Ilustração de uma mulher lendo um livro" width={590} height={590} />
       </div>
 
       </div>

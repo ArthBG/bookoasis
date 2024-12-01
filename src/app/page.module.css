@@ -2,11 +2,14 @@
 .main {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(90deg, #001f3f, #0074D9);
+  background: linear-gradient(150deg, #001f3f, #0074D9);
   height: 100vh;
 }
 .container{
   display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  align-items: center;
 }
 .texts{
   align-self: center;
