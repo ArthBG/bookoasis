@@ -1,6 +1,7 @@
 /* header.module.css */
 .header {
   background: linear-gradient(90deg, #001f3f, #0074D9); /* Gradiente de navy blue */
+  /* background: transparent; */
   width: 100%; /* Largura total */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
   top: 0;
@@ -11,6 +12,7 @@
 }
 .imageLogo {
   margin-left: 2rem; /* Espaçamento interno */
+
 }
 .nav {
   display: flex; /* Alinha os itens horizontalmente */
