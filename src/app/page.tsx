@@ -15,7 +15,7 @@ export default function Home() {
         <Text fontSize="small" color="white.500" width={'70%'}>
         O Book Oasis é um refúgio literário, assim como um oásis no deserto, oferecendo uma vasta coleção de eBooks para explorar, desde best-sellers até clássicos e joias escondidas.
         </Text>
-        <Button variant="solid" width={"fit-content"} borderRadius={20} color="grey" size="xl"  mt={10}>
+        <Button padding={7} variant="solid" width={"fit-content"} borderRadius={40}  fontSize={17} mt={10}>
           Explore agora
         </Button>
         </div>
