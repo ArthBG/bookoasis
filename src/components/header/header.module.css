@@ -34,11 +34,11 @@
   font-size: 1rem; /* Tamanho da fonte */
   font-weight: 500; /* Peso da fonte */
   padding: 10px 15px; /* Espaçamento interno dos links */
-  border-radius: 5px; /* Cantos arredondados */
+  border-radius: 35px; /* Cantos arredondados */
   transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para a cor e o fundo */
 }
 
 .navLink:hover {
-  background-color: #005bb5; /* Cor de fundo ao passar o mouse */
-  color: #FFDC00; /* Cor do texto ao passar o mouse */
+  background-color: #718ddc; /* Cor de fundo ao passar o mouse */
+  color: #000000; /* Cor do texto ao passar o mouse */
 }
