@@ -5,14 +5,13 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(to bottom right, #02034b 1%, #4a69bd 30%, #6a89cc 50%, #DFEBFB 70%); 
-  height: 100%;
+  height: 100dvh;
 }
 
 .container {
   display: flex;
   align-self: start;
-  padding-top: 5rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
 }
 
 .texts {
