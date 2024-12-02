@@ -26,7 +26,7 @@ export default function Home() {
         </Button>
         </div>
         <div className={styles.image}>
-        <img src="../ilustracaoHome.png" className={styles.images} alt="Ilustração de uma mulher lendo um livro" width={1200} height={900} />
+        <img src="../ilustracaoHome.png" className={styles.images} alt="Ilustração de uma mulher lendo um livro" width={1200} height={2000} />
       </div>
 
       </div>

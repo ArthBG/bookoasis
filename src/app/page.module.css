@@ -21,3 +21,8 @@
   display: flex;
   flex-direction: column;
 }
+.image{
+  height: fit-content;
+  width: fit-content;
+
+}
