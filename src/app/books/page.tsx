@@ -2,6 +2,7 @@
 import BooksList from '../../components/booksList/booksList'
 import { useEffect, useState } from 'react'
 import { Book } from '../../types/Book'
+import Header from '@/src/components/header/header';
 
 export default function BooksPage() {
     const [newBook, setNewBook] = useState<Book>({
@@ -62,6 +63,8 @@ export default function BooksPage() {
 
     return (
         <div>
+            <Header />
+            <div style={{ paddingTop: '85px' }}>
             <h1>Books</h1>
             <form onSubmit={handleSubmit}>
                 <input
@@ -137,6 +140,7 @@ export default function BooksPage() {
                 <button type="submit">Add Book</button>
             </form>
             <BooksList />
+            </div>
         </div>
     )
 }
