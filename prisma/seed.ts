@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { books } from '../src/app/data/Books'; 
 
+//Código para popular o banco de dados com os livros
+// Execute com 'yarn prisma db seed'
 const prisma = new PrismaClient();
 
 async function main() {
