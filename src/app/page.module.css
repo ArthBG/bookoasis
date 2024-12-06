@@ -12,7 +12,8 @@
   display: flex;
   align-self: start;
   padding-top: 5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 9rem;
+  height: 88.6dvh;
 }
 
 .texts {

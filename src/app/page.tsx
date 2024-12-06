@@ -15,7 +15,7 @@ export default function Home() {
         <Text fontSize="50px" fontWeight="560" color="white" width={'60%'}>
           Book Oasis 
         </Text>
-        <Text fontSize="50px" fontWeight="400" color="white.500" mt={-5} mb={7}>
+        <Text fontSize="50px" fontWeight="400" color="white.700" mt={-5} mb={7}>
           seu recanto literário
         </Text>
         <Text fontSize="14px" color="white.500" width={'80%'}>
