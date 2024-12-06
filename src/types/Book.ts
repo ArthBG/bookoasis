@@ -9,6 +9,6 @@ export type Book = {
     publisher: string;
     isbn: string;
     language: string;
-    edition: string;
+    edition: number;
     coverURL: string;
 };

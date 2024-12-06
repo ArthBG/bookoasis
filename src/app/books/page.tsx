@@ -2,6 +2,7 @@
 import BooksList from '../../components/booksList/booksList'
 import { useEffect, useState } from 'react'
 import { Book } from '../../types/Book'
+import Header from '@/src/components/header/header';
 
 export default function BooksPage() {
     const [newBook, setNewBook] = useState<Book>({
@@ -15,7 +16,7 @@ export default function BooksPage() {
         publisher: '',
         language: '',
         isbn: '',
-        edition: '',
+        edition: 0,
         coverURL: '',
     });
 
@@ -23,7 +24,7 @@ export default function BooksPage() {
         const { name, value } = e.target;
         setNewBook({
             ...newBook,
-            [name]: name === 'numberOfPages' ? parseInt(value) : value,
+            [name]: name === 'numberOfPages' || name === 'edition' ? parseInt(value) : value,
         });
     };
 
@@ -51,7 +52,7 @@ export default function BooksPage() {
                     publisher: '',
                     language: '',
                     isbn: '',
-                    edition: '',
+                    edition: 0,
                     coverURL: '',
                 });
             }
@@ -62,6 +63,8 @@ export default function BooksPage() {
 
     return (
         <div>
+            <Header />
+            <div style={{ paddingTop: '85px' }}>
             <h1>Books</h1>
             <form onSubmit={handleSubmit}>
                 <input
@@ -137,6 +140,7 @@ export default function BooksPage() {
                 <button type="submit">Add Book</button>
             </form>
             <BooksList />
+            </div>
         </div>
     )
 }
