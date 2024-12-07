@@ -3,10 +3,10 @@ import Header from "../components/header/header";
 import styles from "./page.module.css";
 import { Text } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-
+  const router = useRouter();
   return (
     <main className={styles.main} style={{ paddingTop: '85px' }}>
       <Header />
@@ -21,7 +21,7 @@ export default function Home() {
         <Text fontSize="14px" color="white" width={'80%'}>
         O Book Oasis é um refúgio literário, assim como um oásis no deserto, oferecendo uma vasta coleção de eBooks para explorar, desde best-sellers até clássicos e joias escondidas.
         </Text>
-        <Button padding={7}  variant="outline" width={"fit-content"} borderRadius={40} border={"#02034b 2px solid"} color={"#02034b"} fontSize={17} mt={10}>
+        <Button className={styles.btnHover} padding={7} backgroundColor="#4a69bd"  variant="solid" width={"fit-content"} borderRadius={40} color={"#02034b"} fontSize={17} fontWeight={"black"} mt={10} onClick={() => router.push("/books")}>
           Explore agora
         </Button>
         </div>
