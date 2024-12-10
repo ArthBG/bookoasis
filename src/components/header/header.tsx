@@ -16,6 +16,9 @@ const Header = () => {
         <li className={styles.navItem}>
           <a href="#contact" className={styles.navLink}>Contact</a>
         </li>
+        <li className={styles.login}>
+          <a href="/login" className={styles.loginLink}>Login</a>
+        </li>
       </ul>
     </div>
   );
