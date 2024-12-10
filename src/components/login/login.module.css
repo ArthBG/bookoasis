@@ -1,0 +1,27 @@
+/* LoginPage.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom right, #02034b 1%, #4a69bd 30%, #6a89cc 50%, #DFEBFB 70%); 
+    height: 100dvh;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    padding: 2rem;
+    border-radius: 25px;
+}
+.wrapper {
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+  margin-top: 2rem; /* space-y-8 */
+}
+
+.heading {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: bold;
+}
