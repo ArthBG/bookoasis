@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import styles from './registerUser.module.css';
 
-const RegisterUser: React.FC = () => {
+export default function RegisterUser() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,14 +23,13 @@ const RegisterUser: React.FC = () => {
     // Handle registration logic here
     alert('User registered successfully');
   };
-
   return (
     <Box
       minH="100vh"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bg="gray.50"
+      bg="black.50"
       p={4}
     >
       <Box
@@ -73,7 +72,7 @@ const RegisterUser: React.FC = () => {
                 required
               />
             </Box>
-            <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
+            <Button variant={'surface'} type="submit" size="lg" fontSize="md">
               Register
             </Button>
           </Stack>
@@ -82,5 +81,3 @@ const RegisterUser: React.FC = () => {
     </Box>
   );
 };
-
-export default RegisterUser;
