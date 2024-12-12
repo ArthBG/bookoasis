@@ -13,8 +13,8 @@ const Header = () => {
         <li className={styles.navItem}>
           <a href="#carrinho" className={styles.navLink}>Carrinho</a>
         </li>
-        <li className={styles.login}>
-          <a href="/login" className={styles.navLink}>Login</a>
+        <li className={styles.navItem}>
+          <a href="/register" className={styles.navLink}>register</a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,21 @@
+/* registerUser.module.css */
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7fafc; /* bg-gray-50 */
+  padding: 3rem 1rem; /* px-4 py-12 */
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 28rem; /* max-w-md */
+  margin-top: 2rem; /* space-y-8 */
+}
+
+.heading {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: bold;
+}
