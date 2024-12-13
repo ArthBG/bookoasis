@@ -1,89 +1,128 @@
 'use client';
-import { useState } from 'react';
-import { registerUser } from '@/src/actions/registerUser.actions';
-import { User } from '@/src/types/User';
 import { Button, Input, Stack } from '@chakra-ui/react';
 import { Field } from '../ui/field';
+import { useForm } from 'react-hook-form';
+import { registerUser } from '@/src/actions/registerUser.actions';
 import styles from './registerUser.module.css';
 
-export default function RegisterUser() {
- const [name, setName] = useState<User['name']>('');
- const [birthDate, setBirthDate] = useState<User['birthDate']>(new Date());
- const [email, setEmail] = useState<User['email']>('');
- const [password, setPassword] = useState<User['password']>('');
- const [confirmPassword, setConfirmPassword] = useState<User['password']>('');
-  const [error, setError] = useState<{ name?: { message: string }; birthDate?: { message: string }; email?: { message: string }; password?: { message: string }; confirmPassword?: { message: string } }>({});
-
- const handleSubmit = async (name: User['name'], birthDate: User['birthDate'], email: User['email'], password: User['password'], confirmPassword: User['password']) => {
-    if (password !== confirmPassword) {
-      setError({ confirmPassword: { message: 'As senhas não coincidem' } });
-      return;
-    }
-    if (password.length < 8) {
-      setError({ password: { message: 'A senha deve ter no mínimo 8 caracteres' } });
-      return;
-    }
-    if (name.length < 3) {
-      setError({ name: { message: 'O nome deve ter no mínimo 3 caracteres' } });
-      return;
-    }
-    if (email.length < 5) {
-      setError({ email: { message: 'O email deve ter no mínimo 5 caracteres' } });
-      return;
-    }
-    if (!birthDate) {
-      setError({ birthDate: { message: 'A data de nascimento deve ser preenchida' } });
-      return;
-    }
-    setError({});
-    const user = { name, birthDate, email, password };
-    const response = await registerUser(user);
-    if (response.error) {
-      setError(response.error);
-    }  
+interface FormValues {
+  name: string;
+  birthDate: string; 
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
-  return(
+export default function RegisterUser() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit = async (data: FormValues) => {
+    if (data.password !== data.confirmPassword) {
+      setError('confirmPassword', { message: 'As senhas não coincidem' });
+      return;
+    }
+
+    if (data.password.length < 8) {
+      setError('password', { message: 'A senha deve ter no mínimo 8 caracteres' });
+      return;
+    }
+
+    if (data.name.length < 3) {
+      setError('name', { message: 'O nome deve ter no mínimo 3 caracteres' });
+      return;
+    }
+
+    if (data.email.length < 5) {
+      setError('email', { message: 'O email deve ter no mínimo 5 caracteres' });
+      return;
+    }
+
+    if (!data.birthDate) {
+      setError('birthDate', { message: 'A data de nascimento deve ser preenchida' });
+      return;
+    }
+
+    const user = {
+      name: data.name,
+      birthDate: new Date(data.birthDate), // Converte para Date
+      email: data.email,
+      password: data.password,
+    };
+
+    const response = await registerUser(user);
+
+    if (response.error) {
+      console.error(response.error);
+    } else {
+      console.log('Usuário cadastrado com sucesso!', response);
+    }
+  };
+
+  return (
     <div className={styles.container}>
-      <Stack gap={3}>
+      <Stack gap={4}>
         <Field
-        label="Nome"
-        invalid={!!error.name}
-        errorText={error.name?.message}
-        required
+          label="Nome"
+          invalid={!!errors.name}
+          errorText={errors.name?.message}
         >
-          <Input placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
+          <Input
+            type="text"
+            {...register('name', { required: 'Campo obrigatório' })}
+          />
         </Field>
         <Field
-        label="Data de Nascimento"
-        invalid={!!error.birthDate}
-        errorText={error.birthDate?.message}
+          label="Data de Nascimento"
+          invalid={!!errors.birthDate}
+          errorText={errors.birthDate?.message}
         >
-          <Input type="date" value={birthDate.toISOString().split('T')[0]} onChange={(e) => setBirthDate(new Date(e.target.value))} />
+          <Input
+            type="date"
+            {...register('birthDate', { required: 'Campo obrigatório' })}
+          />
         </Field>
         <Field
-        label="Email"
-        invalid={!!error.email}
-        errorText={error.email?.message}
+          label="Email"
+          invalid={!!errors.email}
+          errorText={errors.email?.message}
         >
-          <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            type="email"
+            {...register('email', { required: 'Campo obrigatório' })}
+          />
         </Field>
         <Field
-        label="Senha"
-        invalid={!!error.password}
-        errorText={error.password?.message}
+          label="Senha"
+          invalid={!!errors.password}
+          errorText={errors.password?.message}
         >
-          <Input placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            type="password"
+            {...register('password', { required: 'Campo obrigatório' })}
+          />
         </Field>
         <Field
-        label="Confirmar Senha"
-        invalid={!!error.confirmPassword}
-        errorText={error.confirmPassword?.message}
+          label="Confirme a senha"
+          invalid={!!errors.confirmPassword}
+          errorText={errors.confirmPassword?.message}
         >
-          <Input placeholder="Confirmar Senha" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <Input
+            type="password"
+            {...register('confirmPassword', { required: 'Campo obrigatório' })}
+          />
         </Field>
-        <Button onClick={() => handleSubmit(name, birthDate, email, password, confirmPassword)}>Cadastrar</Button>
+        <Button
+          onClick={handleSubmit(onSubmit)} 
+          colorScheme="blue"
+        >
+          Cadastrar
+        </Button>
       </Stack>
     </div>
-  )
+  );
 }

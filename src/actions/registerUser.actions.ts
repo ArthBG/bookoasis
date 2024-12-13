@@ -1,5 +1,4 @@
 'use server';
-import { get } from 'http';
 import { User } from '../types/User';
 
 export async function registerUser(user: User) {
