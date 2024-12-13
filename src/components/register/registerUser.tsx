@@ -18,8 +18,19 @@ export default function RegisterUser() {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm<FormValues>();
+
+  const clearErrorFields = () => {
+    setError('name', { message: '' });
+    setError('birthDate', { message: '' });
+    setError('email', { message: '' });
+    setError('password', { message: '' });
+    setError('confirmPassword', { message: '' });
+  };
+  
+
 
   const onSubmit = async (data: FormValues) => {
     if (data.password !== data.confirmPassword) {
@@ -60,6 +71,9 @@ export default function RegisterUser() {
       console.error(response.error);
     } else {
       console.log('Usuário cadastrado com sucesso!', response);
+      clearErrorFields();
+      reset();
+
     }
   };
 
