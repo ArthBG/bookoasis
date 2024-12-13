@@ -5,17 +5,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f7fafc; /* bg-gray-50 */
-  padding: 3rem 1rem; /* px-4 py-12 */
-}
-
-.wrapper {
-  width: 100%;
-  max-width: 28rem; /* max-w-md */
-  margin-top: 2rem; /* space-y-8 */
-}
-
-.heading {
-  font-size: 1.875rem; /* text-3xl */
-  font-weight: bold;
+  background-color: #000000; /* bg-gray-50 */
 }
