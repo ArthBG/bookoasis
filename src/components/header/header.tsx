@@ -2,25 +2,24 @@
 import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import { logout } from '@/src/actions/login.actions';
-import { set } from 'date-fns';
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
 
-  
-
   useEffect(() => {
-    setIsLogged(!!localStorage.getItem('token'));
+    const token = document.cookie.includes('token');
+    setIsLogged(token);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsLogged(false);
+    } catch (error) {
+      console.error('Erro ao realizar logout:', error);
+    }
   }
-  , []);
 
-
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem('token');
-    setIsLogged(false);
-  };
-  console.log(isLogged);
   return (
     <div className={styles.header}>
       <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
