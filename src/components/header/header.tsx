@@ -2,20 +2,26 @@
 import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import { logout } from '@/src/actions/login.actions';
+import { set } from 'date-fns';
 
 const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
 
+  
+
   useEffect(() => {
-    setIsLogged(!!localStorage.getItem('user'));
-  }, []);
+    setIsLogged(!!localStorage.getItem('token'));
+    setIsLogged(true);
+  }
+  , []);
+
 
   const handleLogout = () => {
     logout();
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setIsLogged(false);
   };
-
+  console.log(isLogged);
   return (
     <div className={styles.header}>
       <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
