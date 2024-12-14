@@ -21,6 +21,7 @@ export async function login(email: string, password: string) {
 
     cookiesInstance.set('user', JSON.stringify(user));
 
+
     const { id, name, email: userEmail } = user;
     return { user: { id, name, email: userEmail }, status: 200 };
 } catch (error) {
