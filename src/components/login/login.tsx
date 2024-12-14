@@ -1,9 +1,9 @@
 'use client';
-import Link from 'next/link';
-import { login } from '@/src/actions/login.actions';
+import { login, logout } from '@/src/actions/login.actions';
 import { Input, Button } from '@chakra-ui/react';
 import { useState } from 'react';	
 import { PasswordInput, PasswordStrengthMeter } from '../ui/password-input';
+import Link from 'next/link';
 import styles from './login.module.css';
 
 export default function LoginPage() {
@@ -22,7 +22,14 @@ export default function LoginPage() {
             console.error('Erro ao realizar login:', error);
         }
     };
-
+    const handleLogout = async () => {
+        try {
+            await logout();
+            clearFields();
+        } catch (error) {
+            console.error('Erro ao realizar logout:', error);
+        }
+    }
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -52,6 +59,17 @@ export default function LoginPage() {
                         >
                             Sign in
                         </Button>
+                        <Button
+                            colorScheme="blue"
+                            size="lg"
+                            fontSize="md"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Button>
+                        <Link href="/profile">
+                            profile
+                        </Link>
                     </div>
                 </div>
             </div>
