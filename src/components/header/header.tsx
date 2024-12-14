@@ -11,7 +11,6 @@ const Header = () => {
 
   useEffect(() => {
     setIsLogged(!!localStorage.getItem('token'));
-    setIsLogged(true);
   }
   , []);
 
