@@ -5,10 +5,12 @@ import { useState } from 'react';
 import { PasswordInput, PasswordStrengthMeter } from '../ui/password-input';
 import Link from 'next/link';
 import styles from './login.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const router = useRouter();
 
     const clearFields = () => {
         setEmail('');
@@ -16,8 +18,12 @@ export default function LoginPage() {
     };
     const handleLogin = async () => {
         try {
-            await login(email, password); 
+            if (!email || !password) {
+                return;
+            }
+            await login(email, password);
             clearFields();
+            router.push('/');
         } catch (error) {
             console.error('Erro ao realizar login:', error);
         }
