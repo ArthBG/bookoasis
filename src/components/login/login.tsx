@@ -10,9 +10,14 @@ export default function LoginPage() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    const clearFields = () => {
+        setEmail('');
+        setPassword('');
+    };
     const handleLogin = async () => {
         try {
             await login(email, password); 
+            clearFields();
         } catch (error) {
             console.error('Erro ao realizar login:', error);
         }

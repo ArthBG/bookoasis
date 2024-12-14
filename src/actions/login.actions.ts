@@ -13,18 +13,20 @@ export async function login(email: string, password: string) {
             email, password
         }
     });
+    console.log(user);
 
     if (!user) {
-        return new NextResponse('Usuário não encontrado', { status: 404 });
+        return { error: 'Usuário não encontrado', status: 404 };
     }
 
     cookiesInstance.set('user', JSON.stringify(user));
-    return new NextResponse(JSON.stringify(user), { status: 200 });
-    } catch (error) {
-    console.log('[LOGIN]', error);
-    return new NextResponse('Algo deu errado ao buscar o usuário', { status: 500 });
-    }
 
+    const { id, name, email: userEmail } = user;
+    return { user: { id, name, email: userEmail }, status: 200 };
+} catch (error) {
+    console.error('[LOGIN]', error);
+    return { error: 'Algo deu errado ao buscar o usuário', status: 500 };
+}
 }
     
 export async function logout() {
