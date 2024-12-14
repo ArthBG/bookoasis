@@ -7,7 +7,7 @@ import styles from './registerUser.module.css';
 
 interface FormValues {
   name: string;
-  birthDate: string; // String para compatibilidade com o input type="date"
+  birthDate: string; 
   email: string;
   password: string;
   confirmPassword: string;
@@ -18,7 +18,7 @@ export default function RegisterUser() {
     register,
     handleSubmit,
     setError,
-    reset, // Função para limpar os campos
+    reset, 
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -31,7 +31,7 @@ export default function RegisterUser() {
   });
 
   const onSubmit = async (data: FormValues) => {
-    // Validações
+    
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', { message: 'As senhas não coincidem' });
       return;
@@ -57,10 +57,10 @@ export default function RegisterUser() {
       return;
     }
 
-    // Submissão
+   
     const user = {
       name: data.name,
-      birthDate: new Date(data.birthDate), // Converte para Date
+      birthDate: new Date(data.birthDate), 
       email: data.email,
       password: data.password,
     };
@@ -71,9 +71,7 @@ export default function RegisterUser() {
       console.error(response.error);
     } else {
       console.log('Usuário cadastrado com sucesso!', response);
-
-      // Limpa os valores dos campos após o envio com sucesso
-      reset(); // Redefine todos os campos para os valores padrão (vazios)
+      reset();
     }
   };
 
@@ -131,7 +129,7 @@ export default function RegisterUser() {
           />
         </Field>
         <Button
-          onClick={handleSubmit(onSubmit)} // Chamando handleSubmit manualmente
+          onClick={handleSubmit(onSubmit)} 
           colorScheme="blue"
         >
           Cadastrar
