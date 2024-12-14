@@ -21,7 +21,7 @@ export async function login(email: string, password: string) {
     cookiesInstance.set(tokenKey, 'token');
     cookiesInstance.set({
         name: 'user',
-        value: JSON.stringify(user),
+        value: 'junior',
         httpOnly: true,
         path: '/',
     })

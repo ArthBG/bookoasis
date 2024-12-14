@@ -14,8 +14,9 @@ export async function middleware(request: NextRequest) {
         const url = new URL('/login', request.url);
         url.searchParams.set('unauthorized', 'true');
         return NextResponse.redirect(url);
-    }
+    } else{
     return NextResponse.next();
+    }
 }
 
     export const config = {
