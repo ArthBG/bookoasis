@@ -51,3 +51,38 @@ export async function getUserById(id: string) {
         return error;
     }
 }
+
+export async function deleteUserById(id: string) {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    try {
+        const response = await fetch(`${apiUrl}/api/v1/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log('[DELETE_USER_BY_ID]', error);
+        return error;
+    }
+}
+
+export async function updateUser(id: string, user: User) {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    try {
+        const response = await fetch(`${apiUrl}/api/v1/users/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log('[UPDATE_USER_BY_ID]', error);
+        return error;
+    }
+}

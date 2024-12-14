@@ -7,7 +7,7 @@ import styles from './registerUser.module.css';
 
 interface FormValues {
   name: string;
-  birthDate: string; 
+  birthDate: string; // String para compatibilidade com o input type="date"
   email: string;
   password: string;
   confirmPassword: string;
@@ -18,21 +18,20 @@ export default function RegisterUser() {
     register,
     handleSubmit,
     setError,
-    reset,
+    reset, // Função para limpar os campos
     formState: { errors },
-  } = useForm<FormValues>();
-
-  const clearErrorFields = () => {
-    setError('name', { message: '' });
-    setError('birthDate', { message: '' });
-    setError('email', { message: '' });
-    setError('password', { message: '' });
-    setError('confirmPassword', { message: '' });
-  };
-  
-
+  } = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      birthDate: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
 
   const onSubmit = async (data: FormValues) => {
+    // Validações
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', { message: 'As senhas não coincidem' });
       return;
@@ -58,6 +57,7 @@ export default function RegisterUser() {
       return;
     }
 
+    // Submissão
     const user = {
       name: data.name,
       birthDate: new Date(data.birthDate), // Converte para Date
@@ -71,15 +71,15 @@ export default function RegisterUser() {
       console.error(response.error);
     } else {
       console.log('Usuário cadastrado com sucesso!', response);
-      clearErrorFields();
-      reset();
 
+      // Limpa os valores dos campos após o envio com sucesso
+      reset(); // Redefine todos os campos para os valores padrão (vazios)
     }
   };
 
   return (
     <div className={styles.container}>
-      <Stack gap={4}>
+      <Stack gap={4} paddingTop={50} maxW="sm">
         <Field
           label="Nome"
           invalid={!!errors.name}
@@ -131,7 +131,7 @@ export default function RegisterUser() {
           />
         </Field>
         <Button
-          onClick={handleSubmit(onSubmit)} 
+          onClick={handleSubmit(onSubmit)} // Chamando handleSubmit manualmente
           colorScheme="blue"
         >
           Cadastrar

@@ -75,3 +75,42 @@ export async function DELETE(request: Request, {params}: {params: {userID: strin
         return new NextResponse('Algo deu errado ao deletar um usuário', { status: 500 });
     }
 }
+
+export async function PUT(request: Request, {params}: {params: {userID: string}}) {
+    const id = params.userID;
+    const data = await request.json();
+
+    try {
+        if (!id) {
+            return new NextResponse('User ID is required', { status: 400 });
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        });
+
+        if (!user) {
+            return new NextResponse('User not found', { status: 404 });
+        }
+
+        await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                name: data.name,
+                birthDate: new Date(data.birthDate),
+                email: data.email,
+                password: data.password
+            }
+        });
+
+        return new NextResponse('User updated', { status: 200 });
+    } catch (error) {
+        console.log('[USERS_ID_PUT]', error);
+
+        return new NextResponse('Algo deu errado ao atualizar um usuário', { status: 500 });
+    }
+}
