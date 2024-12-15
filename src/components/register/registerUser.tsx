@@ -7,7 +7,7 @@ import styles from './registerUser.module.css';
 
 interface FormValues {
   name: string;
-  birthDate: string; 
+  birthDate: Date; 
   email: string;
   password: string;
   confirmPassword: string;
@@ -23,7 +23,7 @@ export default function RegisterUser() {
   } = useForm<FormValues>({
     defaultValues: {
       name: '',
-      birthDate: '',
+      birthDate: new Date(),
       email: '',
       password: '',
       confirmPassword: '',

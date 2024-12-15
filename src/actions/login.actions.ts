@@ -18,7 +18,7 @@ export async function login(email: string, password: string) {
         return { error: 'Usuário não encontrado', status: 404 };
     }
 
-    cookiesInstance.set(tokenKey, user.id, { path: '/' });
+    cookiesInstance.set(user.name, tokenKey, { path: '/' });
 
 
     const { id, name, email: userEmail } = user;
