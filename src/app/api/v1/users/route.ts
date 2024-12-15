@@ -68,3 +68,11 @@ export async function POST(request: NextRequest) {
     return new NextResponse('Algo deu errado ao criar um novo usuário', { status: 500 })
   }
 }
+
+// faça um post teste no insomina de useres :
+// {
+//   "name": "teste",
+//   "birthDate": "1990-01-01",
+//   "email": "
+//   "password": "123456"
+// }
