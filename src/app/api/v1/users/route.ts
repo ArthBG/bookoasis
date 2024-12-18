@@ -35,6 +35,7 @@ export async function GET() {
 // refreshToken RefreshToken[] @relation("UserRefreshToken")
 export async function POST(request: NextRequest) {
   const { name, birthDate, email, password } = await request.json()
+  console.log('all data', name, birthDate, email, password)
 
   // Verify if all required fields are filled
   if (!name || !birthDate || !email || !password) {
@@ -44,8 +45,10 @@ export async function POST(request: NextRequest) {
 
 
   try {
-    const formattedBirthDate = format(new Date(birthDate), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-    const age = new Date().getFullYear() - new Date(birthDate).getFullYear()
+    //birthdate esta vindo como string birthDate: '2024-12-05', então vamos converter para date
+    const birthDateNew = new Date(birthDate)
+    const formattedBirthDate = format(birthDateNew, 'yyyy-MM-dd')
+    const age = new Date().getFullYear() - birthDateNew.getFullYear()
     const user = await prisma.user.create({
       data: {
         name,

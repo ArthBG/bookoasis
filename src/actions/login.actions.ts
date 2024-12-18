@@ -1,5 +1,5 @@
 'use server';
-import { tokenKey } from '../middlewares/auth.middleware';
+import { tokenKey } from '../middleware';
 import prisma from '@/libs/prisma';
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from 'next/server';

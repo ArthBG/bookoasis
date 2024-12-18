@@ -1,13 +1,13 @@
 'use client';
 import { Button, Input, Stack } from '@chakra-ui/react';
 import { Field } from '../ui/field';
-import { useForm } from 'react-hook-form';
+import { Form, useForm } from 'react-hook-form';
 import { registerUser } from '@/src/actions/registerUser.actions';
 import styles from './registerUser.module.css';
 
 interface FormValues {
   name: string;
-  birthDate: Date; 
+  birthDate: string; 
   email: string;
   password: string;
   confirmPassword: string;
@@ -23,14 +23,14 @@ export default function RegisterUser() {
   } = useForm<FormValues>({
     defaultValues: {
       name: '',
-      birthDate: new Date(),
+      birthDate: '',
       email: '',
       password: '',
       confirmPassword: '',
     },
   });
-
   const onSubmit = async (data: FormValues) => {
+    console.log(data);
     
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', { message: 'As senhas não coincidem' });
@@ -60,7 +60,7 @@ export default function RegisterUser() {
    
     const user = {
       name: data.name,
-      birthDate: new Date(data.birthDate), 
+      birthDate: data.birthDate,
       email: data.email,
       password: data.password,
     };
@@ -74,67 +74,64 @@ export default function RegisterUser() {
       reset();
     }
   };
-
+  
   return (
     <div className={styles.container}>
-      <Stack gap={4} paddingTop={50} maxW="sm">
-        <Field
-          label="Nome"
-          invalid={!!errors.name}
-          errorText={errors.name?.message}
-        >
-          <Input
-            type="text"
-            {...register('name', { required: 'Campo obrigatório' })}
-          />
-        </Field>
-        <Field
-          label="Data de Nascimento"
-          invalid={!!errors.birthDate}
-          errorText={errors.birthDate?.message}
-        >
-          <Input
-            type="date"
-            {...register('birthDate', { required: 'Campo obrigatório' })}
-          />
-        </Field>
-        <Field
-          label="Email"
-          invalid={!!errors.email}
-          errorText={errors.email?.message}
-        >
-          <Input
-            type="email"
-            {...register('email', { required: 'Campo obrigatório' })}
-          />
-        </Field>
-        <Field
-          label="Senha"
-          invalid={!!errors.password}
-          errorText={errors.password?.message}
-        >
-          <Input
-            type="password"
-            {...register('password', { required: 'Campo obrigatório' })}
-          />
-        </Field>
-        <Field
-          label="Confirme a senha"
-          invalid={!!errors.confirmPassword}
-          errorText={errors.confirmPassword?.message}
-        >
-          <Input
-            type="password"
-            {...register('confirmPassword', { required: 'Campo obrigatório' })}
-          />
-        </Field>
-        <Button
-          onClick={handleSubmit(onSubmit)} 
-          colorScheme="blue"
-        >
-          Cadastrar
-        </Button>
-      </Stack>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <Stack gap={4} marginTop={24}>
+          <Field
+            label="Nome"
+            invalid={!!errors.name}
+            errorText={errors.name?.message}
+          >
+            <Input
+              type="text"
+              {...register('name', { required: 'Campo obrigatório' })}
+            />
+          </Field>
+          <Field
+            label="Data de Nascimento"
+            invalid={!!errors.birthDate}
+            errorText={errors.birthDate?.message}
+          >
+            <Input
+              type="date"
+              {...register('birthDate', { required: 'Campo obrigatório' })}
+            />
+          </Field>
+          <Field
+            label="Email"
+            invalid={!!errors.email}
+            errorText={errors.email?.message}
+          >
+            <Input
+              type="email"
+              {...register('email', { required: 'Campo obrigatório' })}
+            />
+          </Field>
+          <Field
+            label="Senha"
+            invalid={!!errors.password}
+            errorText={errors.password?.message}
+          >
+            <Input
+              {...register('password', { required: 'Campo obrigatório' })}
+            />
+          </Field>
+          <Field
+            label="Confirme a senha"
+            invalid={!!errors.confirmPassword}
+            errorText={errors.confirmPassword?.message}
+          >
+            <Input
+              {...register('confirmPassword', { required: 'Campo obrigatório' })}
+            />
+          </Field>
+          <Button type="submit" colorScheme="blue">
+            Cadastrar
+          </Button>
+        </Stack>
+      </form>
     </div>
-  );
+  )
 }

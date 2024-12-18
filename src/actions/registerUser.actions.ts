@@ -11,6 +11,9 @@ export async function registerUser(user: User) {
             },
             body: JSON.stringify(user),
         })
+        if (!response.ok) {
+            throw new Error('HTTP Error! Status: ' + response.status); 
+        }
         const data = await response.json();
         return data;
     } catch (error) {
