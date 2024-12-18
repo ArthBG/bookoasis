@@ -59,10 +59,10 @@ export default function RegisterUser() {
 
    
     const user = {
-      name: data.name,
-      birthDate: data.birthDate,
-      email: data.email,
-      password: data.password,
+      name: 'USERNAME',
+      birthDate: '2021-09-01',
+      email: 'USERNAME@email',
+      password: 'password'
     };
 
     const response = await registerUser(user);
