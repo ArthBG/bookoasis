@@ -4,8 +4,14 @@ import prisma from '@/libs/prisma';
 export async function GET() {
   try {
     const users = await prisma.user.findMany({
-      orderBy: {
-        createdAt: 'asc'
+      select: {
+        id: true,
+        name: true,
+        birthDate: true,
+        email: true,
+        age: true,
+        createdAt: true,
+        updatedAt: true
       }
     })
 
@@ -18,7 +24,7 @@ export async function GET() {
   } catch (error) {
     console.log('[USERS_GET]', error)
 
-    return new NextResponse('Algo deu errado ao buscar todos os usuários', { status: 500 })
+    return new NextResponse('Algo deu errado ao buscar os usuários', { status: 500 })
   }
 }
 //  id String  @id @default(cuid())
@@ -37,22 +43,24 @@ export async function POST(request: NextRequest) {
   const { name, birthDate, email, password } = await request.json()
   console.log('all data', name, birthDate, email, password)
 
-  // Verify if all required fields are filled
+  // Verificar se todos os campos obrigatórios estão preenchidos
   if (!name || !birthDate || !email || !password) {
     return new NextResponse('Todos os campos são obrigatórios', { status: 400 })
   }
 
-
-
   try {
-    //birthdate esta vindo como string birthDate: '2024-12-05', então vamos converter para date
+    // Converter a string de birthDate para um objeto Date
     const birthDateNew = new Date(birthDate)
-    const formattedBirthDate = format(birthDateNew, 'yyyy-MM-dd')
+    if (isNaN(birthDateNew.getTime())) {
+      return new NextResponse('Data de nascimento inválida', { status: 400 })
+    }
+
     const age = new Date().getFullYear() - birthDateNew.getFullYear()
+
     const user = await prisma.user.create({
       data: {
         name,
-        birthDate: formattedBirthDate,
+        birthDate: birthDateNew, 
         email,
         password,
         age
@@ -71,6 +79,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse('Algo deu errado ao criar um novo usuário', { status: 500 })
   }
 }
+
 
 // faça um post teste no insomina de useres :
 // {
