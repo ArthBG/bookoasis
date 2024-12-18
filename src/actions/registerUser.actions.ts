@@ -3,6 +3,7 @@ import { User } from '../types/User';
 
 export async function registerUser(user: User) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    console.log('user', user);
     try {
         const response = await fetch(`${apiUrl}/api/v1/users`, {
             method: 'POST',

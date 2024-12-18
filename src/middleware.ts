@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
     const cookiesInstance = cookies();
     const token = cookiesInstance.get(tokenKey);
 
-    const protectedRoutes = ['/api/v1/users', '/profile'];
+    const protectedRoutes = ['/profile'];
     const isProtectedRoute = protectedRoutes.includes(request.nextUrl.pathname);
 
     if (isProtectedRoute && !token) {
@@ -20,5 +20,5 @@ export async function middleware(request: NextRequest) {
 }
 
     export const config = {
-        matcher: [ '/api/v1/users/:path*', '/profile/:path*' ],
+        matcher: [ '/profile/:path*' ],
     };
