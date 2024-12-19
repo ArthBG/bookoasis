@@ -9,7 +9,7 @@ export default function Home() {
   const router = useRouter();
   return (
     <main className={styles.main} style={{ paddingTop: '85px' }}>
-      <Header />
+      <Header backgroundColor="transparent" />
       <div className={styles.container}>
         <div className={styles.texts}>
         <Text fontSize="50px" fontWeight="560" color="white" width={'60%'}>

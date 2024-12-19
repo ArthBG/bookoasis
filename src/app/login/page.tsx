@@ -5,7 +5,7 @@ import Header from '@/src/components/header/header';
 export default function Page() {
     return (
         <>
-            <Header />
+            <Header backgroundColor="transparent"/>
             <LoginPage />
         </>
     )

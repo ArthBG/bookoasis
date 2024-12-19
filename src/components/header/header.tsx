@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import { logout } from '@/src/actions/login.actions';
 
-const Header = () => {
+type HeaderProps = {
+  backgroundColor: string;
+}
+
+const Header = ({ backgroundColor }: HeaderProps) => {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const Header = () => {
   }
 
   return (
-    <div className={styles.header}>
+    <div className={styles.header} style={{ backgroundColor: backgroundColor }}>
       <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
       <ul className={styles.nav}>
         <li className={styles.navItem}>
