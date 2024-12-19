@@ -1,8 +1,28 @@
+'use client';
+import { useState, useEffect } from 'react';
 import styles from './header.module.css';
+import { logout } from '@/src/actions/login.actions';
+
 const Header = () => {
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    const token = document.cookie.includes('token');
+    setIsLogged(token);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsLogged(false);
+    } catch (error) {
+      console.error('Erro ao realizar logout:', error);
+    }
+  }
+
   return (
     <div className={styles.header}>
-      <img src={"../BookOasisWletters.png"}alt="Book Oasis" className={styles.imageLogo} />
+      <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
       <ul className={styles.nav}>
         <li className={styles.navItem}>
           <a href="/" className={styles.navLink}>Home</a>
@@ -13,9 +33,25 @@ const Header = () => {
         <li className={styles.navItem}>
           <a href="#carrinho" className={styles.navLink}>Carrinho</a>
         </li>
-        <li className={styles.login}>
-          <a href="/login" className={styles.navLink}>Login</a>
-        </li>
+        {isLogged ? (
+          <>
+            <li className={styles.navItem}>
+              <a href="/profile" className={styles.navLink}>Perfil</a>
+            </li>
+            <li className={styles.navItem}>
+              <button onClick={handleLogout} className={styles.navLink}>Logout</button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className={styles.navItem}>
+              <a href="/register" className={styles.navLink}>Cadastro</a>
+            </li>
+            <li className={styles.navItem}>
+              <a href="/login" className={styles.navLink}>Login</a>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );
