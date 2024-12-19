@@ -53,8 +53,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingUser) {
-      return new NextResponse('E-mail já cadastrado', { status: 409 });
+      return new NextResponse(JSON.stringify({ error: 'E-mail já cadastrado' }), {
+        status: 409,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
+    
 
     const birthDateNew = new Date(birthDate);
     if (isNaN(birthDateNew.getTime())) {
