@@ -1,5 +1,6 @@
 'use client';
 import { Button, Input, Stack } from '@chakra-ui/react';
+import { useState } from 'react';
 import { Field } from '../ui/field';
 import { Form, useForm } from 'react-hook-form';
 import { registerUser } from '@/src/actions/registerUser.actions';
@@ -29,6 +30,10 @@ export default function RegisterUser() {
       confirmPassword: '',
     },
   });
+
+  const [errorEmailaa, setErrorEmailaa] = useState('');
+  console.log('errorEmail:', errorEmailaa);
+
   const onSubmit = async (data: FormValues) => {
     console.log(data);
     
@@ -59,20 +64,34 @@ export default function RegisterUser() {
 
    
     const user = {
-      name: 'USERNAME',
-      birthDate: '2021-09-01',
-      email: 'USERNAME@email',
-      password: 'password'
+      name: data.name,
+      birthDate: data.birthDate,
+      email: data.email,
+      password: data.password
     };
 
-    const response = await registerUser(user);
-
-    if (response.error) {
-      console.error(response.error);
-    } else {
-      console.log('Usuário cadastrado com sucesso!', response);
-      reset();
+    try {
+      const response = await registerUser(user);
+  
+      if (response.error) {
+        setErrorEmailaa(response.error.message);
+      } else {
+        console.log('Usuário cadastrado com sucesso!', response);
+        reset(); 
+      }
+    } catch (err) {
+      console.error('Erro ao registrar usuário:', err);
+      setErrorEmailaa('Erro inesperado. Tente novamente.');
     }
+  
+  };
+
+  const errorEmailExhibition = () => {
+    setTimeout(() => {
+      setErrorEmailaa('');
+    }, 5000);
+    return <p className={styles.errorEmail}>{errorEmailaa}</p>;
+  
   };
   
   return (
@@ -127,6 +146,7 @@ export default function RegisterUser() {
               {...register('confirmPassword', { required: 'Campo obrigatório' })}
             />
           </Field>
+          {errorEmailExhibition()}
           <Button type="submit" colorScheme="blue">
             Cadastrar
           </Button>
