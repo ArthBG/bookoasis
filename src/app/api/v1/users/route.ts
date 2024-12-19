@@ -40,43 +40,50 @@ export async function GET() {
 // books Book[] @relation("UserBook")
 // refreshToken RefreshToken[] @relation("UserRefreshToken")
 export async function POST(request: NextRequest) {
-  const { name, birthDate, email, password } = await request.json()
-  console.log('all data', name, birthDate, email, password)
+  const { name, birthDate, email, password } = await request.json();
+  console.log('all data no route', name, birthDate, email, password);
 
-  // Verificar se todos os campos obrigatórios estão preenchidos
   if (!name || !birthDate || !email || !password) {
-    return new NextResponse('Todos os campos são obrigatórios', { status: 400 })
+    return new NextResponse('Todos os campos são obrigatórios', { status: 400 });
   }
 
   try {
-    // Converter a string de birthDate para um objeto Date
-    const birthDateNew = new Date(birthDate)
-    if (isNaN(birthDateNew.getTime())) {
-      return new NextResponse('Data de nascimento inválida', { status: 400 })
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return new NextResponse('E-mail já cadastrado', { status: 409 });
     }
 
-    const age = new Date().getFullYear() - birthDateNew.getFullYear()
+    const birthDateNew = new Date(birthDate);
+    if (isNaN(birthDateNew.getTime())) {
+      return new NextResponse('Data de nascimento inválida', { status: 400 });
+    }
 
+    const age = new Date().getFullYear() - birthDateNew.getFullYear();
+
+    // Criar o usuário
     const user = await prisma.user.create({
       data: {
         name,
-        birthDate: birthDateNew, 
+        birthDate: birthDateNew,
         email,
         password,
-        age
-      }
-    })
+        age,
+      },
+    });
 
     return new NextResponse(JSON.stringify(user), {
       status: 201,
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        'Content-Type': 'application/json',
+      },
+    });
   } catch (error) {
-    console.log('[USERS_POST]', error)
+    console.log('[USERS_POST]', error);
 
-    return new NextResponse('Algo deu errado ao criar um novo usuário', { status: 500 })
+    return new NextResponse('Algo deu errado ao criar um novo usuário', { status: 500 });
   }
 }
 
