@@ -1,24 +1,24 @@
 import { NextResponse, NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
 
 export const tokenKey = 'token';
 
 export async function middleware(request: NextRequest) {
-    const token = request.cookies.get(tokenKey)?.value;
+    const cookiesInstance = cookies();
+    const token = cookiesInstance.get(tokenKey);
 
     const protectedRoutes = ['/profile'];
-    const isProtectedRoute = protectedRoutes.some((route) =>
-        request.nextUrl.pathname.startsWith(route)
-    );
+    const isProtectedRoute = protectedRoutes.includes(request.nextUrl.pathname);
 
     if (isProtectedRoute && !token) {
         const url = new URL('/login', request.url);
-        url.searchParams.set('unauthorized', 'true'); 
+        url.searchParams.set('unauthorized', 'true');
         return NextResponse.redirect(url);
-    }
-
+    } else{
     return NextResponse.next();
+    }
 }
 
-export const config = {
-    matcher: ['/profile/:path*'], 
-};
+    export const config = {
+        matcher: [ '/profile/:path*' ],
+    };
