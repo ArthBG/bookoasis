@@ -87,10 +87,15 @@ export default function RegisterUser() {
   };
 
   const errorEmailExhibition = () => {
+    if (errorEmailaa) {
     setTimeout(() => {
       setErrorEmailaa('');
-    }, 5000);
+    }, 10000);
     return <p className={styles.errorEmail}>{errorEmailaa}</p>;
+  }
+  else {
+    return null;
+  }
   
   };
   
