@@ -1,10 +1,11 @@
 'use client';
 import { Button, Input, Stack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect, use } from 'react';
 import { Field } from '../ui/field';
 import { Form, useForm } from 'react-hook-form';
 import { registerUser } from '@/src/actions/registerUser.actions';
 import styles from './registerUser.module.css';
+import { m } from 'framer-motion';
 
 interface FormValues {
   name: string;
@@ -31,8 +32,17 @@ export default function RegisterUser() {
     },
   });
 
-  const [errorEmailaa, setErrorEmailaa] = useState('');
-  console.log('errorEmail:', errorEmailaa);
+  const [errorEmailaa, setErrorEmailaa] = useState({ status: '', message: '' });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErrorEmailaa({ status: '', message: '' });
+    }, 9000);
+
+    return () => clearTimeout(timeout); 
+  }
+  , [errorEmailaa]);
+
 
   const onSubmit = async (data: FormValues) => {
     console.log(data);
@@ -74,30 +84,34 @@ export default function RegisterUser() {
       const response = await registerUser(user);
   
       if (response.error) {
-        setErrorEmailaa(response.error.message);
+        setErrorEmailaa({ status: 'error', message: response.error.message });
       } else {
         console.log('Usuário cadastrado com sucesso!', response);
+        setErrorEmailaa({ status: 'success', message: 'Usuário cadastrado com sucesso!' });
         reset(); 
       }
     } catch (err) {
       console.error('Erro ao registrar usuário:', err);
-      setErrorEmailaa('Erro inesperado. Tente novamente.');
+      setErrorEmailaa({ status: 'error', message: 'Erro ao registrar usuário' });
     }
   
   };
 
   const errorEmailExhibition = () => {
-    if (errorEmailaa) {
-    setTimeout(() => {
-      setErrorEmailaa('');
-    }, 10000);
-    return <p className={styles.errorEmail}>{errorEmailaa}</p>;
+    if (errorEmailaa.status === 'error') {
+      return (
+        <div className={styles.errorEmail}>
+          {errorEmailaa.message}
+        </div>
+      );
+    } else if (errorEmailaa.status === 'success') {
+      return (
+        <div className={styles.successEmail}>
+          {errorEmailaa.message}
+        </div>
+      );
+    }
   }
-  else {
-    return null;
-  }
-  
-  };
   
   return (
     <div className={styles.container}>
@@ -160,3 +174,4 @@ export default function RegisterUser() {
     </div>
   )
 }
+
