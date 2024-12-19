@@ -100,7 +100,7 @@ export default function RegisterUser() {
   const errorEmailExhibition = () => {
     if (errorEmailaa.status === 'error') {
       return (
-        <div className={styles.errorEmail}>
+        <div className={styles.errorcomEmail}>
           {errorEmailaa.message}
         </div>
       );

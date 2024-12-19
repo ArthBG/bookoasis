@@ -5,14 +5,14 @@
   align-items: center;
   justify-content: center;
 };
-.errorEmail {
+.errorEmailcom {
   color: red;
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 8px;
 }
 .successEmail {
   color: green;
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 8px;
 }
 
