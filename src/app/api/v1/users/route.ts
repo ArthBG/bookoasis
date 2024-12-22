@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { hashPassword } from '@/src/utils/passwordUtils';
 import { format } from 'date-fns';
 import prisma from '@/libs/prisma';
 export async function GET() {
@@ -68,14 +69,14 @@ export async function POST(request: NextRequest) {
     }
 
     const age = new Date().getFullYear() - birthDateNew.getFullYear();
-
+    const hashedPassword = await hashPassword(password);
     // Criar o usuário
     const user = await prisma.user.create({
       data: {
         name,
         birthDate: birthDateNew,
         email,
-        password,
+        password: hashedPassword,
         age,
       },
     });

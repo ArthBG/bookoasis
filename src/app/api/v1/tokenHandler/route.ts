@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function GET(request: NextRequest) {
     const token = request.cookies.get('refresh_token')?.value;
 
     if (!token) {
@@ -26,6 +26,3 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
 }
 
-export const config = {
-    matcher: ['/profile/:path*'], 
-};

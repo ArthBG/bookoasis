@@ -21,9 +21,13 @@ export default function LoginPage() {
             if (!email || !password) {
                 return;
             }
+            try {
             await login(email, password);
-            clearFields();
             router.push('/');
+            clearFields();
+            } catch (error) {
+                console.error('Erro [LOGINACTIONS]', error);
+            }
         } catch (error) {
             console.error('Erro ao realizar login:', error);
         }
