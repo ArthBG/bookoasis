@@ -1,31 +1,48 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import { logout } from '@/src/actions/login.actions';
 
 type HeaderProps = {
   backgroundColor: string;
-}
+};
 
 const Header = ({ backgroundColor }: HeaderProps) => {
   const [isLogged, setIsLogged] = useState(false);
 
+  const checkUserLoggedIn = async () => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/api/v1/auth`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+
+      setIsLogged(data.isLogged);
+    } catch (error) {
+      console.error('Erro ao verificar estado do usuário:', error);
+    }
+  };
+
   useEffect(() => {
-    const token = document.cookie.includes('token');
-    setIsLogged(token);
+    checkUserLoggedIn();
   }, []);
 
   const handleLogout = async () => {
     try {
       await logout();
-      setIsLogged(false);
+      setIsLogged(false); // Atualiza o estado após logout
     } catch (error) {
       console.error('Erro ao realizar logout:', error);
     }
-  }
+  };
 
   return (
-    <div className={styles.header} style={{ backgroundColor: backgroundColor }}>
+    <div className={styles.header} style={{ backgroundColor }}>
       <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
       <ul className={styles.nav}>
         <li className={styles.navItem}>
