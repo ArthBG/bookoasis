@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import styles from './header.module.css';
 import { logout } from '@/src/actions/login.actions';
@@ -35,7 +34,7 @@ const Header = ({ backgroundColor }: HeaderProps) => {
   const handleLogout = async () => {
     try {
       await logout();
-      setIsLogged(false); // Atualiza o estado após logout
+      setIsLogged(false); 
     } catch (error) {
       console.error('Erro ao realizar logout:', error);
     }
