@@ -9,6 +9,7 @@ type HeaderProps = {
 
 const Header = ({ backgroundColor }: HeaderProps) => {
   const [isLogged, setIsLogged] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
 
   const checkUserLoggedIn = async () => {
     try {
@@ -18,12 +19,20 @@ const Header = ({ backgroundColor }: HeaderProps) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', 
       });
-      const data = await response.json();
 
-      setIsLogged(data.isLogged);
+      if (response.ok) {
+        const data = await response.json();
+        setIsLogged(data.isLogged);
+      } else {
+        console.error('Erro ao verificar autenticação:', response.statusText);
+        setIsLogged(false);
+      }
     } catch (error) {
       console.error('Erro ao verificar estado do usuário:', error);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -42,7 +51,7 @@ const Header = ({ backgroundColor }: HeaderProps) => {
 
   return (
     <div className={styles.header} style={{ backgroundColor }}>
-      <img src={"../BookOasisWletters.png"} alt="Book Oasis" className={styles.imageLogo} />
+      <img src="../BookOasisWletters.png" alt="Book Oasis" className={styles.imageLogo} />
       <ul className={styles.nav}>
         <li className={styles.navItem}>
           <a href="/" className={styles.navLink}>Home</a>
@@ -59,7 +68,9 @@ const Header = ({ backgroundColor }: HeaderProps) => {
               <a href="/profile" className={styles.navLink}>Perfil</a>
             </li>
             <li className={styles.navItem}>
-              <button onClick={handleLogout} className={styles.navLink}>Logout</button>
+              <button onClick={handleLogout} className={styles.navLink}>
+                Logout
+              </button>
             </li>
           </>
         ) : (
