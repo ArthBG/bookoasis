@@ -23,7 +23,7 @@ export default function LoginPage() {
             }
             await login(email, password);
             clearFields();
-            router.push('/');
+            // router.push('/');
         } catch (error) {
             console.error('Erro ao realizar login:', error);
         }
