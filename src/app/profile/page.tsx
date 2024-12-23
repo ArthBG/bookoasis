@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/src/components/header/header";
 
 type User = {
@@ -14,7 +14,6 @@ type User = {
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -43,9 +42,10 @@ export default function ProfilePage() {
       }
     };
 
+  useEffect(() => {
     fetchUserData();
-  }, []);
-
+  }
+  , []);
   if (!user) {
     return (
       <div>
@@ -58,7 +58,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Header backgroundColor="blue" />
+      <Header backgroundColor="black" />
       <div style={{ paddingTop: "100px" }}>
         <h1>Perfil de {user.name}</h1>
         <p>
