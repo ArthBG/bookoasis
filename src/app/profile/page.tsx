@@ -49,7 +49,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div>
-        <Header backgroundColor="blue" />
+        <Header backgroundColor="black" />
         <h1>Profile</h1>
         <p>Carregando informações do usuário...</p>
       </div>
