@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-
+import { AuthProvider } from '../context/auth'
 import './globals.css'
 import { cn } from '../../libs/utils'
 import { Provider } from '../components/ui/provider'
@@ -24,7 +24,9 @@ export default function RootLayout({
     <html lang={'pt-BR'} suppressHydrationWarning>
       <body className={cn('min-h-screen font-sans antialiased relative', inter.className)}>
         <Provider attribute={'class'} defaultTheme={'system'} enableSystem disableTransitionOnChange>
+        <AuthProvider>
           {children}
+        </AuthProvider>
         </Provider>
       </body>
     </html>
