@@ -52,11 +52,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  // Functional case
   // useEffect(() => {
   //   checkAuth();
   //   const interval = setInterval(checkAuth, 1000 * 60 * 0.02); // 1.0 segundos
   //   return () => clearInterval(interval);
   // }, []);
+
+  // Case that should work aff
+  useEffect(() => {
+    checkAuth();
+  },[])
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user }}>
