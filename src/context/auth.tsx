@@ -52,11 +52,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  useEffect(() => {
-    checkAuth();
-    const interval = setInterval(checkAuth, 1000 * 60 * 0.02); // 1.0 segundos
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   checkAuth();
+  //   const interval = setInterval(checkAuth, 1000 * 60 * 0.02); // 1.0 segundos
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user }}>
