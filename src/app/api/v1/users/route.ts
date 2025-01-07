@@ -44,8 +44,8 @@ export async function POST(request: NextRequest) {
   const { name, birthDate, email, password } = await request.json();
   console.log('all data no route', name, birthDate, email, password);
 
-  if (!name || !birthDate || !email || !password) {
-    return new NextResponse('Todos os campos são obrigatórios', { status: 400 });
+  if (!name || !email) {
+    return new NextResponse('Campos nome e email são obrigatórios', { status: 400 });
   }
 
   try {
@@ -63,13 +63,13 @@ export async function POST(request: NextRequest) {
     }
     
 
-    const birthDateNew = new Date(birthDate);
-    if (isNaN(birthDateNew.getTime())) {
+    const birthDateNew = birthDate ? new Date(birthDate) : new Date('0000-00-00T00:00:00');
+    const age = birthDate ? new Date().getFullYear() - birthDateNew!.getFullYear() : null;
+    const hashedPassword = password ? await hashPassword(password) : null;
+
+    if (birthDate && isNaN(birthDateNew!.getTime())) {
       return new NextResponse('Data de nascimento inválida', { status: 400 });
     }
-
-    const age = new Date().getFullYear() - birthDateNew.getFullYear();
-    const hashedPassword = await hashPassword(password);
     // Criar o usuário
     const user = await prisma.user.create({
       data: {
