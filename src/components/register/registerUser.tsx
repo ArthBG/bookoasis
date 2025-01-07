@@ -4,7 +4,11 @@ import { useState, useEffect, use } from 'react';
 import { Field } from '../ui/field';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '@/src/actions/registerUser.actions';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 import styles from './registerUser.module.css';
+
 
 interface FormValues {
   name: string;
@@ -114,6 +118,7 @@ export default function RegisterUser() {
   
   return (
     <div className={styles.container}>
+     
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Stack gap={4} marginTop={24}>
           <Field
@@ -170,6 +175,22 @@ export default function RegisterUser() {
           </Button>
         </Stack>
       </form>
+      <GoogleOAuthProvider clientId="736046766596-i7edgg5ui23ojtlqa38bfo8rtqhq75ok.apps.googleusercontent.com">
+        Login com Google
+      <GoogleLogin
+  onSuccess={credentialResponse => {
+    if (credentialResponse?.credential) {
+      const decoded = jwtDecode(credentialResponse.credential);
+      console.log(decoded);
+    } else {
+      console.log('Credential is undefined');
+    };
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+  </GoogleOAuthProvider>
     </div>
   )
 }
