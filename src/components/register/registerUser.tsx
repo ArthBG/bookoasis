@@ -2,10 +2,9 @@
 import { Button, Input, Stack } from '@chakra-ui/react';
 import { useState, useEffect, use } from 'react';
 import { Field } from '../ui/field';
-import { Form, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { registerUser } from '@/src/actions/registerUser.actions';
 import styles from './registerUser.module.css';
-import { m } from 'framer-motion';
 
 interface FormValues {
   name: string;
