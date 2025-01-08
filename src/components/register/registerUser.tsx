@@ -35,11 +35,10 @@ export default function RegisterUser() {
     },
   });
 
-  const [googleUser, setGoogleUser] = useState<FormValues | null>(null);
   const router = useRouter();
 
   const onSubmit = async (data: FormValues) => {
-    if (!googleUser) {
+
       if (data.password !== data.confirmPassword) {
         setError('confirmPassword', { message: 'As senhas não coincidem' });
         return;
@@ -48,23 +47,23 @@ export default function RegisterUser() {
         setError('password', { message: 'A senha deve ter no mínimo 8 caracteres' });
         return;
       }
-    }
+    
 
     const user = {
-      name: googleUser?.name || data.name,
-      email: googleUser?.email || data.email,
-      birthDate: data.birthDate || googleUser?.birthDate || null,
-      password: data.password || null, 
+      name: data.name,
+      email: data.email,
+      birthDate: data.birthDate || null,
+      password: data.password || '', 
     };
 
     try {
       const response = await registerUser(user);
+      console.log(response)
       if (response.error) {
         console.error(response.error.message);
       } else {
         console.log('Usuário cadastrado com sucesso!', response);
         reset();
-        setGoogleUser(null);
         router.push('/login')
       }
     } catch (err) {
@@ -72,15 +71,32 @@ export default function RegisterUser() {
     }
   };
 
-  const handleGoogleSuccess = (credentialResponse: any) => {
+  const handleGoogleSuccess = async (credentialResponse: any) => {
     if (credentialResponse?.credential) {
       const decoded: any = jwtDecode(credentialResponse.credential);
       const { family_name, given_name, email } = decoded;
-
-      setGoogleUser({
-        name: `${family_name} ${given_name}`,
-        email,
-      });
+      const name = `${family_name} ${given_name}`;
+      const emailG = email;
+      const userWGoogle = {
+        name: name || '',
+        email: emailG || '',
+        birthDate: null,
+        password: '', 
+      }
+      console.log(userWGoogle)
+      try {
+        const res = await registerUser(userWGoogle)
+        console.log(res)
+        if (res.error) {
+          console.error(res.error.message);
+        } else {
+        console.log('Usuário cadastrado com sucesso!', res);
+        reset();
+        router.push('/login')
+        }
+      } catch (error) {
+        console.error('Erro ao registrar usuário:', error)
+      }
 
       console.log('Google User:', { name: `${family_name} ${given_name}`, email });
 
@@ -91,8 +107,6 @@ export default function RegisterUser() {
 
   return (
     <div className={styles.container}>
-      {!googleUser ? (
-        <>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <Stack gap={4} marginTop={24}>
               <Field
@@ -156,40 +170,6 @@ export default function RegisterUser() {
               onError={() => console.log('Login Google falhou')}
             />
           </GoogleOAuthProvider>
-        </>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-          <Stack gap={4} marginTop={24}>
-            <Field label="Nome">
-              <Input
-                type="text"
-                value={googleUser.name}
-                disabled
-              />
-            </Field>
-            <Field label="Email">
-              <Input
-                type="email"
-                value={googleUser.email}
-                disabled
-              />
-            </Field>
-            <Field
-              label="Data de Nascimento"
-              invalid={!!errors.birthDate}
-              errorText={errors.birthDate?.message}
-            >
-              <Input
-                type="date"
-                {...register('birthDate', { required: 'Campo obrigatório' })}
-              />
-            </Field>
-            <Button type="submit" colorScheme="blue">
-              Cadastrar
-            </Button>
-          </Stack>
-        </form>
-      )}
     </div>
   );
 }
