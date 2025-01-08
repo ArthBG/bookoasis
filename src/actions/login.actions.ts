@@ -6,7 +6,7 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET as string;
 const ACCESS_TOKEN_EXPIRATION = '15m'; 
-const REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000; // 7 dias
+const REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60; // 7 dias
 
 export async function login(email: string, password: string) {
     const cookiesInstance = cookies();
@@ -52,7 +52,7 @@ export async function login(email: string, password: string) {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
-            maxAge: REFRESH_TOKEN_EXPIRATION / 1000,
+            maxAge: REFRESH_TOKEN_EXPIRATION,
         });
 
         const { id, name, email: userEmail } = user;
