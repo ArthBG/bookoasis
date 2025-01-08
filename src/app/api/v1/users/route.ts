@@ -62,14 +62,26 @@ export async function POST(request: NextRequest) {
       });
     }
     
-
-    const birthDateNew = birthDate ? new Date(birthDate) : new Date('0000-00-00T00:00:00');
-    const age = birthDate ? new Date().getFullYear() - birthDateNew!.getFullYear() : null;
-    const hashedPassword = password ? await hashPassword(password) : null;
+    let birthDateNew:Date;
+    if(birthDate == null){
+      birthDateNew = new Date('0001-01-01T00:00:00.000Z')
+    } else{
+      birthDateNew = new Date(birthDate)
+    }
+    
+    let age;
+    if(birthDateNew == null){
+      age = 0
+    } else{
+      age = new Date().getFullYear() - birthDateNew.getFullYear() 
+    }
+    
+    const hashedPassword = await hashPassword(password) ;
 
     if (birthDate && isNaN(birthDateNew!.getTime())) {
       return new NextResponse('Data de nascimento inválida', { status: 400 });
     }
+    console.log(birthDateNew)
     // Criar o usuário
     const user = await prisma.user.create({
       data: {
