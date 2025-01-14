@@ -81,7 +81,7 @@ export default function RegisterUser() {
         name: name || '',
         email: emailG || '',
         birthDate: null,
-        password: '', 
+        password: 'GoogleSignIn', 
       }
       console.log(userWGoogle)
       try {
