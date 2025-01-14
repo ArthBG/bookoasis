@@ -19,13 +19,12 @@ export async function login(email: string, password: string) {
         if (!user) {
             return { error: 'Usuário não encontrado', status: 404 };
         }
-
+        if(user.password){
         const passwordMatch = await comparePassword(password, user.password);
-
         if (!passwordMatch) {
             return { error: 'Credenciais inválidas', status: 401 };
         }
-
+        }
         const accessToken = jwt.sign({ userId: user.id }, ACCESS_TOKEN_SECRET, {
             expiresIn: ACCESS_TOKEN_EXPIRATION,
         });
