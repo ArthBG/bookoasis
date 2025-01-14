@@ -6,6 +6,8 @@ import { PasswordInput, PasswordStrengthMeter } from '../ui/password-input';
 import Link from 'next/link';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import {jwtDecode} from "jwt-decode";
 
 export default function LoginPage() {
     const [email, setEmail] = useState<string>('');
@@ -32,6 +34,22 @@ export default function LoginPage() {
             console.error('Erro ao realizar login:', error);
         }
     };
+    const handleGoogleSuccess = async (credentialResponse: any) => {
+        if(credentialResponse?.credential){
+            try {
+             const decoded: any = jwtDecode(credentialResponse.credential);
+             const { email } = decoded;
+             const emailG = email;
+             const pG = 'GoogleSignIn'
+             await login(emailG, pG);
+             router.push('/');
+             clearFields();
+                
+            } catch (error) {
+                console.log('Erro ao realizar login com Google:', error)
+            }
+        }
+    }
     const handleLogout = async () => {
         try {
             await logout();
@@ -82,6 +100,12 @@ export default function LoginPage() {
                         </Link>
                     </div>
                 </div>
+                <GoogleOAuthProvider clientId="736046766596-i7edgg5ui23ojtlqa38bfo8rtqhq75ok.apps.googleusercontent.com">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => console.log('Login Google falhou')}
+            />
+          </GoogleOAuthProvider>
             </div>
         </div>
     );
